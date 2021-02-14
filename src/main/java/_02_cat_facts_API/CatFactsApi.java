@@ -67,10 +67,19 @@ public class CatFactsApi {
     }
 
     public String getCatFact() {
+    	 Mono<Result[]> cheetahMono = webClient
+                 .get()
+                 .uri(uriBuilder -> uriBuilder
+                         .queryParam("q", topic)
+                         .build())
+                 .retrieve()
+                 .bodyToMono(Result[].class);
+
+         return cheetahMono.block();
 
         //Make the request, saving the response in an object of the type that you just created in your
         //data_transfer_objects package (CatWrapper)
-    
+    	
     	
     	
         //Use block() to collect the response into a java object using the class you just created
@@ -85,7 +94,7 @@ public class CatFactsApi {
         //use the getCatFact method to retrieve a cat fact
     
         //return the first (and only) String in the Arraylist of data in the response
-       
+       return null;
     }
 
     public void setWebClient(WebClient webClient) {
