@@ -28,7 +28,7 @@ public class JeopardyApi {
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .build();
     }
-
+    
     public Clue getClue(int value) {
 
         //1  Use the WebClient code from the previous exercises to make the request:
@@ -38,13 +38,21 @@ public class JeopardyApi {
         //with the specified point value.
         //
         //Make sure to save the response as type Clue[].class in the bodyToMono() method call
+    	Mono<Clue[]> clueMono = webClient
+                .get().uri(uriBuilder->uriBuilder.queryParam("value", value).build())
+                .retrieve()
+                .bodyToMono(Clue[].class);
 
+        Clue[] data = clueMono.block();
+        
+       
         //2
         //Get a random number less than the size of the Clue array
-
+    	Random random = new Random();
+    	int ran = random.nextInt(data.length-1);
         //3
         //return the clue at the random index you just created
 
-        return null;
+        return data[ran];
     }
 }
