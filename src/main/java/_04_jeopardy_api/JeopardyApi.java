@@ -52,7 +52,7 @@ public class JeopardyApi {
     	int ran = random.nextInt(data.length-1);
         //3
         //return the clue at the random index you just created
-
+    	
         return data[ran];
     }
 }

@@ -25,20 +25,24 @@ for (int i = 100; i <=1000; i+=100) {
 			
 		}else {
             //4. Call the getClue() method with i
-			jeopardyApi.getClue(i);
+			Clue test = jeopardyApi.getClue(i);
+			//System.out.println(jeopardyApi.getClue(i));
             //5. Save the question in a String variable
-			String question = jeopardyApi.getClue(i).getQuestion();
+			String question = test.getQuestion();
+			//System.out.println(question);
             //6. Save the answer in a String variable
-			String answer = jeopardyApi.getClue(i).getAnswer();
+			String answer = test.getAnswer();
+			System.out.println(answer);
             //7. Save the title in a String variable
             //note that this is part of the Category object
-			String title = jeopardyApi.getClue(i).getCategory().getTitle();
-		
+			String title = test.getCategory().getTitle();
+			
             //8. Use a JOptionPane to display the question.
             //You can set the title of the JOptionPane to the question title.
-			String response = JOptionPane.showInputDialog(question, title);
+			String response = JOptionPane.showInputDialog(null, question, title, JOptionPane.QUESTION_MESSAGE);
             //9. If they got the question correct, add the value of that question to their score
-			if (answer==response) {
+			
+			if (answer.equals(response)) {
 				score += i;
 			}
 		}}
